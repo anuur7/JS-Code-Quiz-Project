@@ -4,13 +4,12 @@ let score = 0;
 
   
 function start() {
-    timeLeft = 5;
+    timeLeft = 2;
     document.getElementById("timeLeft").innerHTML = timeLeft;
   
     timer = setInterval(function () {
       timeLeft--;
       document.getElementById("timeLeft").innerHTML = timeLeft;
-      //proceed to end the game function when timer is below 0 at any time
       if (timeLeft <= 0) {
         clearInterval(timer);
         endGame();
@@ -37,6 +36,21 @@ function start() {
   <input type="text" id="name" placeholder="First name"> 
   
   <button onclick="setScore()">Set score!</button>`;
+  
+    document.getElementById("quizBody").innerHTML = quizContent;
+  }
+
+  function setScore() {
+    localStorage.setItem("highscore", score);
+    localStorage.setItem("highscoreName", document.getElementById("name").value);
+    getScore();
+  }
+  
+  function getScore() {
+    var quizContent =
+      `
+  <h2>` + localStorage.getItem("highscoreName") + `'s highscore is:</h2>
+  <h1>` + localStorage.getItem("highscore") + `</h1><br> <button onclick="clearScore()">Clear score!</button><button onclick="resetGame()">Play Again!</button>`;
   
     document.getElementById("quizBody").innerHTML = quizContent;
   }
