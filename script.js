@@ -1,3 +1,6 @@
+let timeLeft = 0;
+let timer;
+
 function start() {
     timeLeft = 100;
     document.getElementById("timeLeft").innerHTML = timeLeft;
