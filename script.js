@@ -1,8 +1,8 @@
 let timeLeft = 0;
 let timer;
 let score = 0;
+let currentQuestion = -1;
 
-  
 function start() {
     timeLeft = 2;
     document.getElementById("timeLeft").innerHTML = timeLeft;
@@ -47,10 +47,34 @@ function start() {
   }
   
   function getScore() {
-    var quizContent =
-      `
-  <h2>` + localStorage.getItem("highscoreName") + `'s highscore is:</h2>
-  <h1>` + localStorage.getItem("highscore") + `</h1><br> <button onclick="clearScore()">Clear score!</button><button onclick="resetGame()">Play Again!</button>`;
+    var quizContent = `<h2>` + localStorage.getItem("highscoreName") + `'s highscore is:</h2><h1>` 
+    + localStorage.getItem("highscore") 
+    + `</h1><br> <button onclick="clearScore()">Clear score!</button><button onclick="resetGame()">Play Again!</button>`;
   
     document.getElementById("quizBody").innerHTML = quizContent;
   }
+
+  //clear the score name and value in the local storage if the user selects 'clear score'
+function clearScore() {
+    localStorage.setItem("highscore", "");
+    localStorage.setItem("highscoreName", "");
+  
+    resetGame();
+  }
+  
+  //reset the game
+  function resetGame() {
+    clearInterval(timer);
+    score = 0;
+    currentQuestion = -1;
+    timeLeft = 0;
+    timer = null;
+  
+    document.getElementById("timeLeft").innerHTML = timeLeft;
+  
+    document.getElementById("quizBody").innerHTML = quizContent;
+  }
+
+
+
+  
