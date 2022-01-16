@@ -76,7 +76,7 @@ function setScore() {
 }
 
 function getScore() {
-  var quizContent =
+  let quizContent =
     `
 <h2>` +
     localStorage.getItem("highscoreName") +
